@@ -1,10 +1,10 @@
 import createError, { HttpError } from "http-errors";
-import express, { NextFunction, Request, Response } from "express";
+import express, { Request, Response } from "express";
 import promMid from "express-prometheus-middleware";
 import cors from "cors";
 import timeRouter from "./routes/time";
 
-var app = express();
+const app = express();
 
 app.use(cors());
 
@@ -37,12 +37,7 @@ app.use(function (_req, _res, next) {
 });
 
 // error handler
-app.use(function (
-  err: HttpError,
-  req: Request,
-  res: Response,
-  _next: NextFunction
-) {
+app.use(function (err: HttpError, req: Request, res: Response) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get("env") === "development" ? err : {};
