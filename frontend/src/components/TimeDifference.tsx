@@ -38,8 +38,12 @@ export function TimeDifference() {
 
   return (
     <div>
-      <p>{serverTimeSeconds}</p>
-      <p>{formattedTime}</p>
+      <p>
+        <b>Server Time</b>: {serverTimeSeconds}
+      </p>
+      <p>
+        <b>Time Difference</b>: {formattedTime}
+      </p>
     </div>
   );
 }
