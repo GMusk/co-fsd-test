@@ -20,6 +20,7 @@ export function TimeDifference() {
     queryKey: ["serverTime"],
     queryFn: getServerTime,
     onSuccess: () => setClientTime(moment()),
+    refetchInterval: 30000,
   });
 
   if (isLoading) {
