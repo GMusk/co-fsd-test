@@ -1,9 +1,12 @@
 import createError, { HttpError } from "http-errors";
 import express, { NextFunction, Request, Response } from "express";
 import promMid from "express-prometheus-middleware";
+import cors from "cors";
 import timeRouter from "./routes/time";
 
 var app = express();
+
+app.use(cors());
 
 app.use(
   promMid({
