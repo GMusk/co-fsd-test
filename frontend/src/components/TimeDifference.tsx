@@ -3,7 +3,9 @@ import moment from "moment";
 import { useEffect, useState } from "react";
 
 async function getServerTime() {
-  const res = await fetch("http://localhost:3000/time");
+  const res = await fetch("http://localhost:3000/time", {
+    headers: { authorization: "mysecrettoken" },
+  });
   if (res.status !== 200) {
     throw new Error("Server Failure");
   }

@@ -15,19 +15,19 @@ app.use(
     requestDurationBuckets: [0.1, 0.5, 1, 1.5],
     requestLengthBuckets: [512, 1024, 5120, 10240, 51200, 102400],
     responseLengthBuckets: [512, 1024, 5120, 10240, 51200, 102400],
-    /**
-     * Uncomenting the `authenticate` callback will make the `metricsPath` route
-     * require authentication. This authentication callback can make a simple
-     * basic auth test, or even query a remote server to validate access.
-     * To access /metrics you could do:
-     * curl -X GET user:password@localhost:9091/metrics
-     */
-    //authenticate: req => req.headers.authorization === 'Basic dXNlcjpwYXNzd29yZA==',
+    authenticate: (req) => req.headers.authorization === "mysecrettoken",
   })
 );
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+
+app.use(function (req, _res, next) {
+  if (req.headers.authorization !== "mysecrettoken") {
+    next(createError(403));
+  }
+  next();
+});
 
 app.use("/time", timeRouter);
 

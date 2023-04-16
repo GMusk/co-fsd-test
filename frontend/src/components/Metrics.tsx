@@ -1,7 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
 
 async function getMetrics() {
-  const res = await fetch("http://localhost:3000/metrics");
+  const res = await fetch("http://localhost:3000/metrics", {
+    headers: { authorization: "mysecrettoken" },
+  });
   if (res.status !== 200) {
     throw new Error("Server Failure");
   }
